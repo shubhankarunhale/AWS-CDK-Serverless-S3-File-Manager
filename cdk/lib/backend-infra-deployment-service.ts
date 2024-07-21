@@ -124,7 +124,7 @@ export class BackendInfraDeploymentService extends Construct {
       : [`${bucket.bucketArn}/*`];
     return new lambda.Function(this, id, {
       runtime: lambda.Runtime.NODEJS_20_X,
-      code: lambda.Code.fromAsset(path.resolve(__dirname, '../lambda')),
+      code: lambda.Code.fromAsset(path.resolve(__dirname, '..', 'lambda')),
       handler: handler,
       environment: {
         BUCKET_NAME: bucket.bucketName,
