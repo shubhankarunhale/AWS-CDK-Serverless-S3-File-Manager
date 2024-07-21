@@ -65,11 +65,20 @@ jobs:
 
       - name: Get API Gateway URL
         id: get-url
-        run: echo "::set-output name=url::$(aws cloudformation describe-stacks --stack-name BackendStack --query "Stacks[0].Outputs[?OutputKey=='ApiGateway'].OutputValue" --output text)"
-
+        run: api_url=$(aws cloudformation describe-stacks --stack-name BackendStack --query "Stacks[0].Outputs[?OutputKey=='ApiGateway'].OutputValue" --output text)
+             echo "API_URL=${api_url}" >> $GITHUB_ENV
+             
       - name: Set API Gateway URL
         run: |
-          echo "REACT_APP_API_GATEWAY_URL=${{ steps.get-url.outputs.url }}" >> frontend/.env
+          echo "REACT_APP_API_GATEWAY_URL=${API_URL}" >> frontend/.env
+
+      - name: Use API Gateway URL
+        run: |
+         echo "The API Gateway URL is $API_URL"
+
+      - name: Print .env file contents
+        run: |
+          cat frontend/.env
 
       - name: Deploy FrontendStack
         run: |
