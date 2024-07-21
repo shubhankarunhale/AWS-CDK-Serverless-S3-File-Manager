@@ -5,6 +5,7 @@ import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import {PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { Bucket } from "aws-cdk-lib/aws-s3";
+import * as path from 'path';
 
 export interface DeploymentServiceProps extends cdk.StackProps {
   bucket: Bucket;
@@ -123,7 +124,7 @@ export class BackendInfraDeploymentService extends Construct {
       : [`${bucket.bucketArn}/*`];
     return new lambda.Function(this, id, {
       runtime: lambda.Runtime.NODEJS_20_X,
-      code: lambda.Code.fromAsset("../cdk/lambda"),
+      code: lambda.Code.fromAsset(path.resolve(__dirname, '../lambda')),
       handler: handler,
       environment: {
         BUCKET_NAME: bucket.bucketName,
