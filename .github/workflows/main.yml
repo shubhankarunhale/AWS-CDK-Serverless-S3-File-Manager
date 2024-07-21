@@ -65,7 +65,7 @@ jobs:
 
       - name: Get API Gateway URL
         id: get-url
-        run: api_url=$(aws cloudformation describe-stacks --stack-name BackendStack --query "Stacks[0].Outputs[?OutputKey=='ApiGateway'].OutputValue" --output text)
+        run: api_url=$(aws cloudformation list-exports --query "Exports[?Name=='ApiGateway'].Value" --output text)
              echo "API_URL=${api_url}" >> $GITHUB_ENV
              
       - name: Set API Gateway URL
