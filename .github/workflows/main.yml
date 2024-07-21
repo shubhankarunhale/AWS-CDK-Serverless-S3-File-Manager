@@ -13,7 +13,6 @@ jobs:
       AWS_REGION: ${{ secrets.AWS_REGION }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      REACT_APP_API_GATEWAY_URL: ${{ secrets.REACT_APP_API_GATEWAY_URL }}
 
     steps:
       - name: Checkout repository
@@ -63,6 +62,11 @@ jobs:
           cd cdk
           npx cdk deploy BackendStack --require-approval never
 
+      - name: Debug API Gateway URL
+        run: |
+         api_url=$(aws cloudformation list-exports --query "Exports[?Name=='ApiGateway'].Value" --output text)
+         echo "API_URL=${api_url}"
+    
       - name: Get API Gateway URL
         id: get-url
         run: api_url=$(aws cloudformation list-exports --query "Exports[?Name=='ApiGateway'].Value" --output text)
@@ -70,6 +74,7 @@ jobs:
              
       - name: Set API Gateway URL
         run: |
+          > frontend/.env
           echo "REACT_APP_API_GATEWAY_URL=${API_URL}" >> frontend/.env
 
       - name: Use API Gateway URL
