@@ -22,7 +22,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20' 
+          node-version: '20' # Specify your Node.js version
+
+      - name: Debug Print working directory
+        run: pwd
+
+      - name: Debug List files
+        run: ls -al
 
       - name: Install frontend dependencies
         run: |
@@ -32,7 +38,7 @@ jobs:
       - name: Build frontend
         run: |
           cd frontend
-          set BUILD_PATH=..\\cdk\\resources\\build
+          export BUILD_PATH=../cdk/resources/build
           npx react-scripts build
 
       - name: Install backend dependencies
@@ -40,10 +46,16 @@ jobs:
           cd cdk
           npm install
 
+      - name: Debug Print working directory
+        run: pwd
+
+      - name: Debug List files
+        run: ls -al
+
       - name: Synthesize CDK
         run: |
           cd cdk
-          set FRONTEND_STACK_EXPORTS_AVAILABLE=false
+          export FRONTEND_STACK_EXPORTS_AVAILABLE=false
           npx cdk synth
 
       - name: Deploy BackendStack
@@ -67,5 +79,5 @@ jobs:
       - name: Deploy BackendStack with exports available
         run: |
           cd cdk
-          set FRONTEND_STACK_EXPORTS_AVAILABLE=true
+          export FRONTEND_STACK_EXPORTS_AVAILABLE=true
           npx cdk deploy BackendStack --require-approval never
