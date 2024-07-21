@@ -69,8 +69,11 @@ jobs:
     
       - name: Get API Gateway URL
         id: get-url
-        run: api_url=$(aws cloudformation list-exports --query "Exports[?Name=='ApiGateway'].Value" --output text)
+        run: |
+             api_url=$(aws cloudformation list-exports --query "Exports[?Name=='ApiGateway'].Value" --output text)
              echo "API_URL=${api_url}" >> $GITHUB_ENV
+             echo "REACT_APP_API_GATEWAY_URL=${api_url}" > frontend/.env
+             
              
       - name: Set API Gateway URL
         run: |
