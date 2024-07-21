@@ -73,16 +73,7 @@ jobs:
              api_url=$(aws cloudformation list-exports --query "Exports[?Name=='ApiGateway'].Value" --output text)
              echo "API_URL=${api_url}" >> $GITHUB_ENV
              echo "REACT_APP_API_GATEWAY_URL=${api_url}" > frontend/.env
-             
-             
-      - name: Set API Gateway URL
-        run: |
-          > frontend/.env
-          echo "REACT_APP_API_GATEWAY_URL=${API_URL}" >> frontend/.env
-
-      - name: Use API Gateway URL
-        run: |
-         echo "The API Gateway URL is $API_URL"
+            
 
       - name: Print .env file contents
         run: |
