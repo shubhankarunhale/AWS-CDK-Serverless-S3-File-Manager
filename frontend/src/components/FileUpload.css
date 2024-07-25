@@ -1,48 +1,35 @@
-
 /* FileUpload.css */
 
 .file-upload-container {
-    text-align: center;
+    background-color: #444; /* Dark grey background */
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 20px auto;
-}
-
-h3 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.error-message {
-    color: red;
-    margin-bottom: 20px;
-}
-
-.presigned-url {
-    margin-bottom: 20px;
-    word-break: break-all;
-}
-
-.file-input-container {
-    margin-bottom: 20px;
-}
-
-button {
-    background-color: #4CAF50;
-    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #f0f0f0; /* Light text color */
+  }
+  
+  .file-input {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #555; /* Slightly lighter grey border */
+    border-radius: 4px;
+    background-color: #333; /* Dark input background */
+    color: #f0f0f0; /* Light text color */
+  }
+  
+  .upload-button {
+    background-color: #009688; /* Teal button */
+    color: #f0f0f0; /* Light text color */
     border: none;
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
-}
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .upload-button:hover {
+    background-color: #00796b; /* Darker teal on hover */
+  }
+  

@@ -1,34 +1,18 @@
-/* App.css */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
-}
-
 .App {
-  text-align: center;
+  background-color: #f8f9fa; /* Light grey background */
+  min-height: 100vh; /* Full viewport height */
 }
 
 .App-header {
-  background-color: #4CAF50;
-  padding: 20px;
-  color: white;
-}
-
-h1 {
-  margin: 0;
-}
-
-main {
+  background-color: #343a40; /* Dark grey background */
+  color: white; /* White text */
+  text-align: center;
   padding: 20px;
 }
 
-.FileUpload, .FileList {
-  margin: 20px auto;
+.file-upload-container, .file-list-container {
+  background-color: white; /* White background for containers */
+  border-radius: 0.375rem; /* Bootstrap border radius */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   padding: 20px;
-  max-width: 600px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

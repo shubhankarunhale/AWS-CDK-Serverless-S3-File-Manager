@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import './FileUpload.css'; // Create a CSS file for custom styling
+import { Container, Form, Button, Alert, Spinner } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
 
 class FileUpload extends React.Component {
     constructor(props) {
@@ -9,7 +10,8 @@ class FileUpload extends React.Component {
             selectedFile: null,
             apiUrl: process.env.REACT_APP_API_GATEWAY_URL,
             error: null,
-            presignedUrl: null
+            presignedUrl: null,
+            uploading: false,
         };
     }
 
@@ -22,9 +24,11 @@ class FileUpload extends React.Component {
         const { selectedFile, apiUrl } = this.state;
 
         if (!selectedFile) {
-            alert('No file selected!');
+            this.setError('No file selected!');
             return;
         }
+
+        this.setState({ uploading: true });
 
         try {
             const response = await axios.post(`${apiUrl}getPresignedUrl`, { key: selectedFile.name });
@@ -45,6 +49,7 @@ class FileUpload extends React.Component {
                     },
                 });
 
+                this.setState({ uploading: false });
                 alert('File uploaded successfully!');
                 console.log('File uploaded successfully:', uploadResponse.data);
             } else {
@@ -52,6 +57,7 @@ class FileUpload extends React.Component {
                 this.setError(`Unexpected status code: ${response.status}`);
             }
         } catch (error) {
+            this.setState({ uploading: false });
             if (error.response) {
                 console.error('Server responded with an error status:', error.response.status);
                 console.error('Error details:', error.response.data);
@@ -71,24 +77,27 @@ class FileUpload extends React.Component {
     };
 
     render() {
-        const { error, presignedUrl } = this.state;
+        const { error, presignedUrl, uploading } = this.state;
         return (
-            <div className="file-upload-container">
-                <h3>File Upload</h3>
-                {error && <div className="error-message">{error}</div>}
+            <Container className="file-upload-container mt-5">
+                <h3 className="text-center mb-4">File Upload</h3>
+                {error && <Alert variant="danger">{error}</Alert>}
                 {presignedUrl && (
-                    <div className="presigned-url">
-                        <p>Presigned URL: {presignedUrl}</p>
-                    </div>
+                    <Alert variant="info">
+                        <p><strong>Presigned URL:</strong> {presignedUrl}</p>
+                    </Alert>
                 )}
 
-                <form onSubmit={this.onFileUpload}>
-                    <div className="file-input-container">
-                        <input type="file" onChange={this.onFileChange} />
-                    </div>
-                    <button type="submit">Upload</button>
-                </form>
-            </div>
+                <Form onSubmit={this.onFileUpload}>
+                    <Form.Group controlId="formFile" className="mb-3">
+                        <Form.Label>Select file to upload</Form.Label>
+                        <Form.Control type="file" onChange={this.onFileChange} />
+                    </Form.Group>
+                    <Button variant="primary" type="submit" disabled={uploading}>
+                        {uploading ? <Spinner as="span" animation="border" size="sm" /> : 'Upload'}
+                    </Button>
+                </Form>
+            </Container>
         );
     }
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { Container, ListGroup, Button, Alert, Spinner } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
 
 class FileList extends React.Component {
     constructor(props) {
@@ -9,6 +11,7 @@ class FileList extends React.Component {
             apiUrl: process.env.REACT_APP_API_GATEWAY_URL,
             error: null,
             noFilesMessage: null,
+            loading: false,
         };
     }
 
@@ -18,6 +21,7 @@ class FileList extends React.Component {
 
     fetchFiles = async () => {
         const { apiUrl } = this.state;
+        this.setState({ loading: true });
 
         try {
             const response = await axios.get(`${apiUrl}listFiles`);
@@ -26,15 +30,16 @@ class FileList extends React.Component {
                 const files = response.data;
 
                 if (files.length === 0) {
-                    this.setState({ noFilesMessage: 'No files present.' });
+                    this.setState({ noFilesMessage: 'No files present.', files: [], loading: false });
                 } else {
-                    this.setState({ files, noFilesMessage: null });
+                    this.setState({ files, noFilesMessage: null, loading: false });
                 }
             } else {
                 console.error('Unexpected status code:', response.status);
                 this.setError(`Unexpected status code: ${response.status}`);
             }
         } catch (error) {
+            this.setState({ loading: false });
             if (error.response) {
                 console.error('Server responded with an error status:', error.response.status);
                 console.error('Error details:', error.response.data);
@@ -62,7 +67,6 @@ class FileList extends React.Component {
             });
     
             if (response.status === 200) {
-                // Remove the file from the state
                 this.setState(prevState => ({
                     files: prevState.files.filter(file => file.key !== fileName),
                     noFilesMessage: prevState.files.length === 1 ? 'No files present.' : prevState.noFilesMessage
@@ -119,25 +123,32 @@ class FileList extends React.Component {
     };
 
     render() {
-        const { files, error, noFilesMessage } = this.state;
+        const { files, error, noFilesMessage, loading } = this.state;
 
         return (
-            <div>
-                <h3>File List</h3>
-                {error && <div style={{ color: 'red' }}>{error}</div>}
-                {noFilesMessage && <div style={{ color: 'gray' }}>{noFilesMessage}</div>}
+            <Container className="mt-5">
+                <h3 className="text-center mb-4">File List</h3>
+                {loading && <Spinner animation="border" variant="primary" />}
+                {error && <Alert variant="danger">{error}</Alert>}
+                {noFilesMessage && <Alert variant="secondary">{noFilesMessage}</Alert>}
                 {files.length > 0 && (
-                    <ul>
+                    <ListGroup>
                         {files.map((file, index) => (
-                            <li key={index}>
+                            <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
                                 {file.key}
-                                <button onClick={() => this.handleDelete(file.key)}>Delete</button>
-                                <button onClick={() => this.handleDownload(file.key)}>Download</button>
-                            </li>
+                                <div>
+                                    <Button variant="danger" onClick={() => this.handleDelete(file.key)} className="me-2">
+                                        Delete
+                                    </Button>
+                                    <Button variant="primary" onClick={() => this.handleDownload(file.key)}>
+                                        Download
+                                    </Button>
+                                </div>
+                            </ListGroup.Item>
                         ))}
-                    </ul>
+                    </ListGroup>
                 )}
-            </div>
+            </Container>
         );
     }
 }
