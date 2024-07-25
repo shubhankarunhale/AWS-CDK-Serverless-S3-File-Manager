@@ -49,6 +49,7 @@ To configure the AWS account with the necessary permissions, use the AWS Managem
 
 3. **Push Changes:**
    Push any changes to your forked repository. This will trigger the GitHub Actions workflow to deploy your application.
+   To access the deployment "run logs>Get Deployment Url step" to get the deployment url
 
 ### Run Locally
 
