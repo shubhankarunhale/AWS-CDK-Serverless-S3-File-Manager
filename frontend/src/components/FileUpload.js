@@ -1,14 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import { Container, Form, Button, Alert, Spinner } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
 
 class FileUpload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selectedFile: null,
-            apiUrl: process.env.REACT_APP_API_GATEWAY_URL,
             error: null,
             presignedUrl: null,
             uploading: false,
@@ -21,7 +19,8 @@ class FileUpload extends React.Component {
 
     onFileUpload = async event => {
         event.preventDefault();
-        const { selectedFile, apiUrl } = this.state;
+        const { selectedFile } = this.state;
+        const { apiUrl, onUploadSuccess } = this.props;
 
         if (!selectedFile) {
             this.setError('No file selected!');
@@ -52,6 +51,11 @@ class FileUpload extends React.Component {
                 this.setState({ uploading: false });
                 alert('File uploaded successfully!');
                 console.log('File uploaded successfully:', uploadResponse.data);
+
+                // Notify parent component to refresh the file list
+                if (onUploadSuccess) {
+                    onUploadSuccess();
+                }
             } else {
                 console.error('Unexpected status code:', response.status);
                 this.setError(`Unexpected status code: ${response.status}`);
@@ -60,7 +64,6 @@ class FileUpload extends React.Component {
             this.setState({ uploading: false });
             if (error.response) {
                 console.error('Server responded with an error status:', error.response.status);
-                console.error('Error details:', error.response.data);
                 this.setError(`Error: ${error.response.status} - ${error.response.data}`);
             } else if (error.request) {
                 console.error('No response received:', error.request);
@@ -77,17 +80,11 @@ class FileUpload extends React.Component {
     };
 
     render() {
-        const { error, presignedUrl, uploading } = this.state;
+        const { error, uploading } = this.state;
         return (
             <Container className="file-upload-container mt-5">
                 <h3 className="text-center mb-4">File Upload</h3>
                 {error && <Alert variant="danger">{error}</Alert>}
-                {presignedUrl && (
-                    <Alert variant="info">
-                        <p><strong>Presigned URL:</strong> {presignedUrl}</p>
-                    </Alert>
-                )}
-
                 <Form onSubmit={this.onFileUpload}>
                     <Form.Group controlId="formFile" className="mb-3">
                         <Form.Label>Select file to upload</Form.Label>
