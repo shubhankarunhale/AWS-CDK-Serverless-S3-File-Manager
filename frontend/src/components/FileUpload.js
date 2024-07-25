@@ -50,7 +50,7 @@ class FileUpload extends React.Component {
                 });
 
                 this.setState({ uploading: false });
-                alert('File uploaded successfully!');
+                
                 console.log('File uploaded successfully:', uploadResponse.data);
 
                 // Notify parent component to refresh the file list

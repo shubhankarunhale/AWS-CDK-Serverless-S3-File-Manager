@@ -56,10 +56,23 @@ The most important and unique aspect of this application is its ability to dynam
 
 ### Prerequisites
 
-- Node.js (v14 or later)
+- Node.js (v20 or later)
 - AWS CLI
 - AWS CDK (v2)
 - GitHub account
+
+### AWS Account Permissions
+
+Ensure the AWS account you're using has the necessary permissions to access and manage the required services. This includes permissions for:
+
+*   S3
+*   Lambda
+*   API Gateway
+*   CloudFormation
+*   IAM
+
+To configure the AWS account with the necessary permissions, use the AWS Management Console or AWS CLI to attach the appropriate policies to your user or role. You can use AWS-managed policies such as `AdministratorAccess` for full permissions or create a custom policy with the least privilege principle.
+
 
 ### Deploy Using GitHub Actions
 
@@ -72,11 +85,21 @@ The most important and unique aspect of this application is its ability to dynam
    - `AWS_ACCESS_KEY_ID`
    - `AWS_SECRET_ACCESS_KEY`
    - `AWS_REGION`
-   - `S3_BUCKET_NAME`
 
 3. **Push Changes:**
    Push any changes to your forked repository. This will trigger the GitHub Actions workflow to deploy your application.
 
+### Run Locally
+
+1. **Clone the Repository:**
+   ```sh
+   git clone https://github.com/your-username/AWS-S3-Secure-File-Manager-Starter.git
+   cd AWS-S3-Secure-File-Manager-Starter
+   ```
+
+2. **Run deploy.sh in bash**
+   ```./deploy.sh
+    ```
 
 ## License
 
