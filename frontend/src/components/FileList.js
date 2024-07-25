@@ -8,6 +8,7 @@ class FileList extends React.Component {
             files: [],
             apiUrl: process.env.REACT_APP_API_GATEWAY_URL,
             error: null,
+            noFilesMessage: null,
         };
     }
 
@@ -22,7 +23,13 @@ class FileList extends React.Component {
             const response = await axios.get(`${apiUrl}listFiles`);
 
             if (response.status === 200) {
-                this.setState({ files: response.data });
+                const files = response.data;
+
+                if (files.length === 0) {
+                    this.setState({ noFilesMessage: 'No files present.' });
+                } else {
+                    this.setState({ files, noFilesMessage: null });
+                }
             } else {
                 console.error('Unexpected status code:', response.status);
                 this.setError(`Unexpected status code: ${response.status}`);
@@ -57,7 +64,8 @@ class FileList extends React.Component {
             if (response.status === 200) {
                 // Remove the file from the state
                 this.setState(prevState => ({
-                    files: prevState.files.filter(file => file.key !== fileName)
+                    files: prevState.files.filter(file => file.key !== fileName),
+                    noFilesMessage: prevState.files.length === 1 ? 'No files present.' : prevState.noFilesMessage
                 }));
             } else {
                 console.error('Unexpected status code:', response.status);
@@ -78,7 +86,6 @@ class FileList extends React.Component {
         }
     };
     
-
     handleDownload = async (fileName) => {
         const { apiUrl } = this.state;
 
@@ -112,21 +119,24 @@ class FileList extends React.Component {
     };
 
     render() {
-        const { files, error } = this.state;
+        const { files, error, noFilesMessage } = this.state;
 
         return (
             <div>
                 <h3>File List</h3>
                 {error && <div style={{ color: 'red' }}>{error}</div>}
-                <ul>
-                    {files.map((file, index) => (
-                        <li key={index}>
-                            {file.key}
-                            <button onClick={() => this.handleDelete(file.key)}>Delete</button>
-                            <button onClick={() => this.handleDownload(file.key)}>Download</button>
-                        </li>
-                    ))}
-                </ul>
+                {noFilesMessage && <div style={{ color: 'gray' }}>{noFilesMessage}</div>}
+                {files.length > 0 && (
+                    <ul>
+                        {files.map((file, index) => (
+                            <li key={index}>
+                                {file.key}
+                                <button onClick={() => this.handleDelete(file.key)}>Delete</button>
+                                <button onClick={() => this.handleDownload(file.key)}>Download</button>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
         );
     }

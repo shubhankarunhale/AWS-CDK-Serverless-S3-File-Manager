@@ -1,52 +1,93 @@
-# Getting Started with Create React App
+# AWS-S3-Secure-File-Manager-Starter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**AWS-S3-Secure-File-Manager-Starter** is a boilerplate starter code for a serverless file management application using AWS services. This application demonstrates secure and efficient file uploads using presigned URLs, enabling scalable and cost-effective file management.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Secure File Uploads**:
+  - **Least Privilege Principle**: Presigned URLs grant temporary, limited access for file uploads, minimizing risk and exposure.
+  - **No Lambda Permissions Needed**: Uploads are handled directly by S3, reducing Lambda's role and associated security risks.
 
-### `npm start`
+- **Scalable Architecture**:
+  - **Direct Upload to S3**: Clients upload files directly to S3, bypassing Lambda and enhancing scalability and performance.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Performance Optimization**:
+  - **Faster Uploads**: Bypassing Lambda for uploads reduces latency and improves performance.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **Cost Efficiency**:
+  - **Reduced Lambda Execution Time**: Minimizes compute resource usage and costs by handling uploads directly through S3.
 
-### `npm test`
+- **Simplicity and Flexibility**:
+  - **Client-Side Control**: Customizable upload parameters and control directly from the client application.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How It Works
 
-### `npm run build`
+1. **Generating Presigned URLs**:
+   - Your backend generates presigned URLs using AWS SDKs. These URLs are temporary and scoped to specific S3 operations.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Client-Side Upload**:
+   - The React frontend receives the presigned URL and uses it to upload files directly to S3 via HTTP PUT or POST requests.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Security and Validation**:
+   - AWS validates the presigned URL parameters, ensuring that only authorized uploads are accepted.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Example Use Case
 
-### `npm run eject`
+**Scenario**: Uploading user-generated files to an S3 bucket.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Implementation**: Lambda functions generate presigned URLs for each upload request.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Advantages**:
+- Simplified architecture
+- Reduced Lambda execution time and costs
+- Enhanced security with temporary, scoped access
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Getting Started
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To set up the project locally:
 
-## Learn More
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/yourusername/AWS-S3-Secure-File-Manager-Starter.git
+    cd AWS-S3-Secure-File-Manager-Starter
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. **Install Dependencies**:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    - **For the frontend**:
+        ```bash
+        cd frontend
+        npm install
+        cd ..
+        ```
 
+    - **For the backend (CDK)**:
+        ```bash
+        cd cdk
+        npm install
+        ```
 
+3. **Configure AWS CLI**:
+   Ensure AWS CLI is configured with your credentials:
+    ```bash
+    aws configure
+    ```
 
-Create a IAM user with the following permissions:
+4. **Deploy the Application**:
+    - Run the deployment script:
+        ```bash
+        ./deploy.sh
+        ```
 
-CDK Bootstrap
+5. **Run the Application Locally**:
+    - Start the frontend:
+        ```bash
+        cd frontend
+        npm start
+        ```
+
+    - Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -12,7 +12,7 @@ exports.handler = async (event) => {
             Bucket: bucketName,
         });
 
-        const { Contents } = await s3Client.send(listObjectsCommand);
+        const { Contents = [] } = await s3Client.send(listObjectsCommand);
 
         // Generate a list of file keys
         const fileList = Contents.map(object => ({

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './FileUpload.css'; // Create a CSS file for custom styling
 
 class FileUpload extends React.Component {
     constructor(props) {
@@ -38,8 +39,6 @@ class FileUpload extends React.Component {
                 });
                 formData.append('file', selectedFile);
 
-                //Headers were diffrent when requesting the presigned url
-                //uploading causing the access denied error for upload
                 const uploadResponse = await axios.post(url, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -54,17 +53,13 @@ class FileUpload extends React.Component {
             }
         } catch (error) {
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 console.error('Server responded with an error status:', error.response.status);
                 console.error('Error details:', error.response.data);
                 this.setError(`Error: ${error.response.status} - ${error.response.data}`);
             } else if (error.request) {
-                // The request was made but no response was received
                 console.error('No response received:', error.request);
                 this.setError('No response received from server. Please check your network connection.');
             } else {
-                // Something happened in setting up the request that triggered an Error
                 console.error('Request setup error:', error.message);
                 this.setError(`Request setup error: ${error.message}`);
             }
@@ -78,27 +73,20 @@ class FileUpload extends React.Component {
     render() {
         const { error, presignedUrl } = this.state;
         return (
-            <div>
-                <h3>File Upload using React!</h3>
-                {error && <div style={{ color: 'red' }}>{error}</div>}
+            <div className="file-upload-container">
+                <h3>File Upload</h3>
+                {error && <div className="error-message">{error}</div>}
                 {presignedUrl && (
-                    <div>
+                    <div className="presigned-url">
                         <p>Presigned URL: {presignedUrl}</p>
                     </div>
                 )}
 
                 <form onSubmit={this.onFileUpload}>
-                    <label>
-                        Text input:
-                        <input type="text" name="textInput" />
-                    </label>
-                    <div>
-                        <label>
-                            File Input:
-                            <input type="file" onChange={this.onFileChange} />
-                        </label>
+                    <div className="file-input-container">
+                        <input type="file" onChange={this.onFileChange} />
                     </div>
-                    <input type="submit" value="Submit" />
+                    <button type="submit">Upload</button>
                 </form>
             </div>
         );

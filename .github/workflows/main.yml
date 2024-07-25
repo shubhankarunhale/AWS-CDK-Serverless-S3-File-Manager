@@ -31,61 +31,51 @@ jobs:
 
       - name: Install frontend dependencies
         run: |
-          cd frontend
           npm install
-
-      - name: Build frontend
-        run: |
-          cd frontend
-          export BUILD_PATH=../cdk/resources/build
-          npx react-scripts build
+        working-directory: ./frontend
 
       - name: Install backend dependencies
         run: |
-          cd cdk
           npm install
-
-      - name: Debug Print working directory
-        run: pwd
-
-      - name: Debug List files
-        run: ls -al
+        working-directory: ./cdk
 
       - name: Synthesize CDK
         run: |
-          cd cdk
           export FRONTEND_STACK_EXPORTS_AVAILABLE=false
           npx cdk synth
+        working-directory: ./cdk
 
       - name: Deploy BackendStack
         run: |
-          cd cdk
           npx cdk deploy BackendStack --require-approval never
+        working-directory: ./cdk
 
-      - name: Debug API Gateway URL
-        run: |
-         api_url=$(aws cloudformation list-exports --query "Exports[?Name=='ApiGateway'].Value" --output text)
-         echo "API_URL=${api_url}"
-    
       - name: Get API Gateway URL
         id: get-url
         run: |
-             api_url=$(aws cloudformation list-exports --query "Exports[?Name=='ApiGateway'].Value" --output text)
-             echo "API_URL=${api_url}" >> $GITHUB_ENV
-             echo "REACT_APP_API_GATEWAY_URL=${api_url}" > frontend/.env
-            
+          api_url=$(aws cloudformation list-exports --query "Exports[?Name=='ApiGateway'].Value" --output text)
+          echo "API_URL=${api_url}"
+          echo "REACT_APP_API_GATEWAY_URL=${api_url}" > frontend/.env
+          echo "API_URL=${api_url}" >> $GITHUB_ENV
 
       - name: Print .env file contents
         run: |
           cat frontend/.env
+        working-directory: ./frontend
+
+      - name: Build frontend
+        run: |
+          export BUILD_PATH=../cdk/resources/build
+          npx react-scripts build
+        working-directory: ./frontend
 
       - name: Deploy FrontendStack
         run: |
-          cd cdk
           npx cdk deploy FrontendStack --require-approval never
+        working-directory: ./cdk
 
       - name: Deploy BackendStack with exports available
         run: |
-          cd cdk
           export FRONTEND_STACK_EXPORTS_AVAILABLE=true
           npx cdk deploy BackendStack --require-approval never
+        working-directory: ./cdk

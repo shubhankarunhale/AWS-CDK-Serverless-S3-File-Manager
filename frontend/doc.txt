@@ -1,4 +1,4 @@
-    Using a presigned URL for file upload instead of directly passing files to a Lambda function for upload offers several advantages, especially in the context of AWS services and serverless architectures:
+Using a presigned URL for file upload instead of directly passing files to a Lambda function for upload offers several advantages, especially in the context of AWS services and serverless architectures:
 
 Security:
 
