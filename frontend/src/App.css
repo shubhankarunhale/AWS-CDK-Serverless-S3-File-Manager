@@ -1,6 +1,8 @@
+/* App.css */
 .App {
   background-color: #f8f9fa; /* Light grey background */
   min-height: 100vh; /* Full viewport height */
+  padding: 20px; /* Optional padding */
 }
 
 .App-header {
@@ -10,9 +12,6 @@
   padding: 20px;
 }
 
-.file-upload-container, .file-list-container {
-  background-color: white; /* White background for containers */
-  border-radius: 0.375rem; /* Bootstrap border radius */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  padding: 20px;
+.text-center {
+  text-align: center;
 }

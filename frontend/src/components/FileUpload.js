@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Container, Form, Button, Alert, Spinner } from 'react-bootstrap';
+import './FileUpload.css'
 
 class FileUpload extends React.Component {
     constructor(props) {
@@ -83,7 +84,7 @@ class FileUpload extends React.Component {
         const { error, uploading } = this.state;
         return (
             <Container className="file-upload-container mt-5">
-                <h3 className="text-center mb-4">File Upload</h3>
+                <h3 className="text-center mb-4">Upload a File</h3>
                 {error && <Alert variant="danger">{error}</Alert>}
                 <Form onSubmit={this.onFileUpload}>
                     <Form.Group controlId="formFile" className="mb-3">

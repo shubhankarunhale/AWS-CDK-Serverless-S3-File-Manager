@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import FileUpload from './components/FileUpload';
 import FileList from './components/FileList';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
+import './App.css';  // Ensure this file contains global styles for the app
 
 const App = () => {
     const [files, setFiles] = useState([]);
@@ -34,14 +35,31 @@ const App = () => {
     };
 
     return (
-        <Container className="mt-5">
-            <h1 className="text-center mb-4">File Management App</h1>
-            <FileUpload apiUrl={apiUrl} onUploadSuccess={handleFileUploadSuccess} />
-            {loadingFiles ? (
-                <p>Loading files...</p>
-            ) : (
-                <FileList files={files} apiUrl={apiUrl} />
-            )}
+        <Container className="App">
+            <Row className="mb-4">
+                <Col>
+                    <header className="App-header">
+                        <h1 className="text-center">Serverless File Management</h1>
+                    </header>
+                </Col>
+            </Row>
+            <Row className="mb-4">
+                <Col>
+                    <FileUpload apiUrl={apiUrl} onUploadSuccess={handleFileUploadSuccess} />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    {loadingFiles ? (
+                        <div className="text-center">
+                            <Spinner animation="border" />
+                            <p>Loading files...</p>
+                        </div>
+                    ) : (
+                        <FileList files={files} apiUrl={apiUrl} />
+                    )}
+                </Col>
+            </Row>
         </Container>
     );
 };

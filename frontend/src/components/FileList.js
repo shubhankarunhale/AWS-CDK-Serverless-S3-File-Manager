@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { Container, ListGroup, Button, Alert, Spinner } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
+import './FileList.css'
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 class FileList extends React.Component {
     constructor(props) {
@@ -127,7 +128,7 @@ class FileList extends React.Component {
 
         return (
             <Container className="mt-5">
-                <h3 className="text-center mb-4">File List</h3>
+                <h3 className="text-center mb-4">Your Files</h3>
                 {loading && <Spinner animation="border" variant="primary" />}
                 {error && <Alert variant="danger">{error}</Alert>}
                 {noFilesMessage && <Alert variant="secondary">{noFilesMessage}</Alert>}
