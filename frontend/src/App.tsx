@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import FileUpload from './components/FileUpload';
 import FileList from './components/FileList';
@@ -9,11 +9,7 @@ const App = () => {
     const [loadingFiles, setLoadingFiles] = useState(false);
     const apiUrl = process.env.REACT_APP_API_GATEWAY_URL;
 
-    useEffect(() => {
-        fetchFiles();
-    }, []);
-
-    const fetchFiles = async () => {
+    const fetchFiles = useCallback(async () => {
         setLoadingFiles(true);
         try {
             const response = await axios.get(`${apiUrl}listFiles`);
@@ -27,7 +23,11 @@ const App = () => {
         } finally {
             setLoadingFiles(false);
         }
-    };
+    }, [apiUrl]);
+
+    useEffect(() => {
+        fetchFiles();
+    }, [fetchFiles]);
 
     const handleFileUploadSuccess = () => {
         fetchFiles();  // Reload the file list
