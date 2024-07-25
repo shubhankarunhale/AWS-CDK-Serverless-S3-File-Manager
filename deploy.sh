@@ -59,3 +59,5 @@ npx cdk deploy BackendStack --require-approval never
 echo "BackendStack redeployed with exports available."
 
 echo "Deployment completed successfully."
+deployment_url=$(aws cloudformation list-exports --query "Exports[?Name=='CloudfrontURL'].Value" --output text)
+echo "Access the deployment at: ${deployment_url}"

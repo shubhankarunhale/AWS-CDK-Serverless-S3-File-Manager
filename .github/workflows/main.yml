@@ -78,3 +78,9 @@ jobs:
           cd cdk
           export FRONTEND_STACK_EXPORTS_AVAILABLE=true
           npx cdk deploy BackendStack --require-approval never
+      
+       - name: Get DeploymentURL
+        id: get-deplloyment-url
+        run: |
+          deployment_url=$(aws cloudformation list-exports --query "Exports[?Name=='CloudfrontURL'].Value" --output text)
+          echo "Access the deployment at: ${deployment_url}"

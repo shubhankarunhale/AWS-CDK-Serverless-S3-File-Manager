@@ -23,21 +23,6 @@ export class FrontendDeploymentService extends Construct {
         const oai = new OriginAccessIdentity(this, 'currCloudFrontOAI');
         
         
-        // const distribution = new Distribution(this, 'CloudfrontDistribution', {
-        //     defaultBehavior: {
-        //         origin: new S3Origin(hostingBucket),
-        //         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        //     },
-        //     defaultRootObject: 'index.html',
-        //     errorResponses: [
-        //         {
-        //             httpStatus: 404,
-        //             responseHttpStatus: 200,
-        //             responsePagePath: '/index.html',
-        //         },
-        //     ],
-        // });
-        
         const distribution = new CloudFrontWebDistribution(this, 'CloudfrontDistribution', {
             originConfigs: [
                 {
