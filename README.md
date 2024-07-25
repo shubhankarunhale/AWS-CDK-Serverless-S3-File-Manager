@@ -1,35 +1,45 @@
 # AWS-S3-Secure-File-Manager-Starter
 
-**AWS-S3-Secure-File-Manager-Starter** is a boilerplate starter code for a serverless file management application using AWS services. This application demonstrates secure and efficient file uploads using presigned URLs, enabling scalable and cost-effective file management.
+**AWS-S3-Secure-File-Manager-Starter** is a serverless file management application that leverages AWS services to provide a secure and efficient file upload solution. The standout feature of this app is its **dynamic CORS and frontend configuration**, which happens at runtime, setting it apart from existing alternatives.
+
+## Key Feature
+
+### **Dynamic CORS and Frontend Configuration**
+
+The most important and unique aspect of this application is its ability to dynamically handle CORS and frontend configuration at runtime:
+
+- **Dynamic CORS Configuration**: Just like adjusting the security settings of a new guest at a party based on their role, this app automatically configures CORS settings as new roles are created. This ensures that the S3 bucket’s access policies are updated dynamically, with no manual intervention required.
+
+- **Secure Access Policies**: Think of the S3 bucket as a secure vault that only opens for authorized guests. The app dynamically generates access policies to ensure that only requests from the React frontend are accepted, keeping the bucket secure out of the box.
 
 ## Features
 
 - **Secure File Uploads**:
-  - **Least Privilege Principle**: Presigned URLs grant temporary, limited access for file uploads, minimizing risk and exposure.
+  - **Least Privilege Principle**: Presigned URLs act like temporary keys that grant limited access for file uploads, minimizing risk and exposure.
   - **No Lambda Permissions Needed**: Uploads are handled directly by S3, reducing Lambda's role and associated security risks.
 
 - **Scalable Architecture**:
-  - **Direct Upload to S3**: Clients upload files directly to S3, bypassing Lambda and enhancing scalability and performance.
+  - **Direct Upload to S3**: Clients upload files directly to S3, bypassing Lambda, which is like having a direct express lane for faster and more scalable uploads.
 
 - **Performance Optimization**:
-  - **Faster Uploads**: Bypassing Lambda for uploads reduces latency and improves performance.
+  - **Faster Uploads**: By avoiding Lambda for uploads, the app reduces latency and speeds up the process, similar to cutting out the middleman in a transaction.
 
 - **Cost Efficiency**:
-  - **Reduced Lambda Execution Time**: Minimizes compute resource usage and costs by handling uploads directly through S3.
+  - **Reduced Lambda Execution Time**: Handling uploads directly through S3 minimizes compute resource usage and costs, much like saving on fees by avoiding unnecessary services.
 
 - **Simplicity and Flexibility**:
-  - **Client-Side Control**: Customizable upload parameters and control directly from the client application.
+  - **Client-Side Control**: Provides customizable upload parameters directly from the client application, allowing for tailored upload experiences.
 
 ## How It Works
 
 1. **Generating Presigned URLs**:
-   - Your backend generates presigned URLs using AWS SDKs. These URLs are temporary and scoped to specific S3 operations.
+   - Your backend generates presigned URLs using AWS SDKs. These URLs are temporary and scoped to specific S3 operations, akin to giving out temporary access passes.
 
 2. **Client-Side Upload**:
    - The React frontend receives the presigned URL and uses it to upload files directly to S3 via HTTP PUT or POST requests.
 
 3. **Security and Validation**:
-   - AWS validates the presigned URL parameters, ensuring that only authorized uploads are accepted.
+   - AWS validates the presigned URL parameters, ensuring that only authorized uploads are accepted, like checking IDs before entry.
 
 ## Example Use Case
 
