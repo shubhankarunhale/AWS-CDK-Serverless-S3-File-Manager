@@ -57,10 +57,12 @@ jobs:
           echo "API_URL=${api_url}"
           echo "REACT_APP_API_GATEWAY_URL=${api_url}" > frontend/.env
           echo "API_URL=${api_url}" >> $GITHUB_ENV
+        working-directory: ./frontend
 
-      - name: Print .env file contents
+      - name: Debug Print .env file contents
         run: |
-          cat frontend/.env
+          ls -al frontend
+          cat frontend/.env || echo ".env file not found"
         working-directory: ./frontend
 
       - name: Build frontend
