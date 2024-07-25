@@ -59,7 +59,8 @@ To configure the AWS account with the necessary permissions, use the AWS Managem
    ```
 
 2. **Run deploy.sh in bash**
-   ```./deploy.sh
+   ```
+   ./deploy.sh
     ```
 
 ## Features
