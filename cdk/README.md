@@ -54,49 +54,29 @@ The most important and unique aspect of this application is its ability to dynam
 
 ## Getting Started
 
-To set up the project locally:
+### Prerequisites
 
-1. **Clone the Repository**:
-    ```bash
-    git clone https://github.com/yourusername/AWS-S3-Secure-File-Manager-Starter.git
-    cd AWS-S3-Secure-File-Manager-Starter
-    ```
+- Node.js (v14 or later)
+- AWS CLI
+- AWS CDK (v2)
+- GitHub account
 
-2. **Install Dependencies**:
+### Deploy Using GitHub Actions
 
-    - **For the frontend**:
-        ```bash
-        cd frontend
-        npm install
-        cd ..
-        ```
+1. **Fork the Repository:**
+   Fork this repository to your GitHub account.
 
-    - **For the backend (CDK)**:
-        ```bash
-        cd cdk
-        npm install
-        ```
+2. **Add Secrets:**
+   Add the required parameters to the secrets in your GitHub repository settings. Navigate to `Settings > Secrets > Actions` and add the following secrets:
 
-3. **Configure AWS CLI**:
-   Ensure AWS CLI is configured with your credentials:
-    ```bash
-    aws configure
-    ```
+   - `AWS_ACCESS_KEY_ID`
+   - `AWS_SECRET_ACCESS_KEY`
+   - `AWS_REGION`
+   - `S3_BUCKET_NAME`
 
-4. **Deploy the Application**:
-    - Run the deployment script:
-        ```bash
-        ./deploy.sh
-        ```
+3. **Push Changes:**
+   Push any changes to your forked repository. This will trigger the GitHub Actions workflow to deploy your application.
 
-5. **Run the Application Locally**:
-    - Start the frontend:
-        ```bash
-        cd frontend
-        npm start
-        ```
-
-    - Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## License
 
