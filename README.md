@@ -8,9 +8,59 @@
 
 The most important and unique aspect of this application is its ability to dynamically handle CORS and frontend configuration at runtime:
 
-- **Dynamic CORS Configuration**: Just like adjusting the security settings of a new guest at a party based on their role, this app automatically configures CORS settings as new roles are created. This ensures that the S3 bucket’s access policies are updated dynamically, with no manual intervention required.
+- **Dynamic CORS Configuration**: Automatically configures CORS settings as new roles are created. This ensures that the S3 bucket’s access policies are updated dynamically, with no manual intervention required.
 
-- **Secure Access Policies**: Think of the S3 bucket as a secure vault that only opens for authorized guests. The app dynamically generates access policies to ensure that only requests from the React frontend are accepted, keeping the bucket secure out of the box.
+- **Secure Access Policies**: Dynamically generates access policies to ensure that only requests from the React frontend are accepted, keeping the bucket secure out of the box.
+
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v20 or later)
+- AWS CLI
+- AWS CDK (v2)
+- GitHub account
+
+### AWS Account Permissions
+
+Ensure the AWS account you're using has the necessary permissions to access and manage the required services. This includes permissions for:
+
+*   S3
+*   Lambda
+*   API Gateway
+*   CloudFormation
+*   IAM
+
+To configure the AWS account with the necessary permissions, use the AWS Management Console or AWS CLI to attach the appropriate policies to your user or role. You can use AWS-managed policies such as `AdministratorAccess` for full permissions or create a custom policy with the least privilege principle.
+
+
+### Deploy Using GitHub Actions
+
+1. **Fork the Repository:**
+   Fork this repository to your GitHub account.
+
+2. **Add Secrets:**
+   Add the required parameters to the secrets in your GitHub repository settings. Navigate to `Settings > Secrets > Actions` and add the following secrets:
+
+   - `AWS_ACCESS_KEY_ID`
+   - `AWS_SECRET_ACCESS_KEY`
+   - `AWS_REGION`
+
+3. **Push Changes:**
+   Push any changes to your forked repository. This will trigger the GitHub Actions workflow to deploy your application.
+
+### Run Locally
+
+1. **Clone the Repository:**
+   ```sh
+   git clone https://github.com/your-username/AWS-S3-Secure-File-Manager-Starter.git
+   cd AWS-S3-Secure-File-Manager-Starter
+   ```
+
+2. **Run deploy.sh in bash**
+   ```./deploy.sh
+    ```
 
 ## Features
 
@@ -52,51 +102,6 @@ The most important and unique aspect of this application is its ability to dynam
 - Reduced Lambda execution time and costs
 - Enhanced security with temporary, scoped access
 
-## Getting Started
-
-To set up the project locally:
-
-1. **Clone the Repository**:
-    ```bash
-    git clone https://github.com/yourusername/AWS-S3-Secure-File-Manager-Starter.git
-    cd AWS-S3-Secure-File-Manager-Starter
-    ```
-
-2. **Install Dependencies**:
-
-    - **For the frontend**:
-        ```bash
-        cd frontend
-        npm install
-        cd ..
-        ```
-
-    - **For the backend (CDK)**:
-        ```bash
-        cd cdk
-        npm install
-        ```
-
-3. **Configure AWS CLI**:
-   Ensure AWS CLI is configured with your credentials:
-    ```bash
-    aws configure
-    ```
-
-4. **Deploy the Application**:
-    - Run the deployment script:
-        ```bash
-        ./deploy.sh
-        ```
-
-5. **Run the Application Locally**:
-    - Start the frontend:
-        ```bash
-        cd frontend
-        npm start
-        ```
-
-    - Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## License
 
