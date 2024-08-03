@@ -50,7 +50,7 @@ class FileUpload extends React.Component {
                 });
 
                 this.setState({ uploading: false });
-                
+
                 console.log('File uploaded successfully:', uploadResponse.data);
 
                 // Notify parent component to refresh the file list
@@ -84,26 +84,26 @@ class FileUpload extends React.Component {
         const { error, uploading } = this.state;
         return (
             <Container className="file-upload-container mt-5">
-            <h3 className="text-center mb-4">Upload a File</h3>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={this.onFileUpload}>
-                <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label>Select file to upload</Form.Label>
-                    <Form.Control 
-                        type="file" 
-                        onChange={this.onFileChange} 
-                        className="file-input"  // Use custom class here
-                    />
-                </Form.Group>
-                <Button 
-                    type="submit" 
-                    className="upload-button"  // Use custom class here
-                    disabled={uploading}
-                >
-                    {uploading ? <Spinner as="span" animation="border" size="sm" /> : 'Upload'}
-                </Button>
-            </Form>
-        </Container>
+                <h3 className="text-center mb-4">Upload a File</h3>
+                {error && <Alert variant="danger">{error}</Alert>}
+                <Form onSubmit={this.onFileUpload}>
+                    <Form.Group controlId="formFile" className="mb-3">
+                        <Form.Label>Select file to upload</Form.Label>
+                        <Form.Control
+                            type="file"
+                            onChange={this.onFileChange}
+                            className="file-input"
+                        />
+                    </Form.Group>
+                    <Button
+                        type="submit"
+                        className="upload-button"
+                        disabled={uploading}
+                    >
+                        {uploading ? <Spinner as="span" animation="border" size="sm" /> : 'Upload'}
+                    </Button>
+                </Form>
+            </Container>
         );
     }
 }

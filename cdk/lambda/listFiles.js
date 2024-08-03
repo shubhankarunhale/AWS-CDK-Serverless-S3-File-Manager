@@ -7,14 +7,12 @@ exports.handler = async (event) => {
     const s3Client = new S3Client({ region: process.env.AWS_REGION });
 
     try {
-        // List objects in the bucket
         const listObjectsCommand = new ListObjectsV2Command({
             Bucket: bucketName,
         });
 
         const { Contents = [] } = await s3Client.send(listObjectsCommand);
 
-        // Generate a list of file keys
         const fileList = Contents.map(object => ({
             key: object.Key
         }));

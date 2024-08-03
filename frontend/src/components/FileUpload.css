@@ -1,33 +1,32 @@
 .file-upload-container {
-    background-color: #ffffff; /* White background */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    color: #333; /* Dark text color */
-  }
-  
-  .file-input {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #a5d6a7; /* Light green border */
-    border-radius: 4px;
-    background-color: #e8f5e9; /* Light green input background */
-    color: #333; /* Dark text color */
-  }
-  
-  .upload-button.btn.btn-primary {
-    background-color: #8b7bcf; /* Dark green button */
-    color: #ffffff; /* White text color */
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .upload-button.btn.btn-primary:hover {
-    background-color: #4d4769; /* Green on hover */
-  }
-  
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: #333;
+}
+
+.file-input {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #a5d6a7;
+  border-radius: 4px;
+  background-color: #e8f5e9;
+  color: #333;
+}
+
+.upload-button.btn.btn-primary {
+  background-color: #8b7bcf;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.upload-button.btn.btn-primary:hover {
+  background-color: #4d4769;
+}

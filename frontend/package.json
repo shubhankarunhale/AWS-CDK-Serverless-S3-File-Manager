@@ -1,5 +1,5 @@
 {
-  "name": "AWS-S3-Secure-File-Manager-Starter",
+  "name": "AWS CDK Serverless S3 File Manager",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

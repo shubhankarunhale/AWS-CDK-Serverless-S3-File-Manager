@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Container, ListGroup, Button, Alert, Spinner } from 'react-bootstrap';
 import './FileList.css'
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class FileList extends React.Component {
     constructor(props) {
@@ -61,12 +61,12 @@ class FileList extends React.Component {
 
     handleDelete = async (fileName) => {
         const { apiUrl } = this.state;
-    
+
         try {
             const response = await axios.delete(`${apiUrl}deleteFile`, {
                 params: { key: fileName },
             });
-    
+
             if (response.status === 200) {
                 this.setState(prevState => ({
                     files: prevState.files.filter(file => file.key !== fileName),
@@ -90,7 +90,7 @@ class FileList extends React.Component {
             }
         }
     };
-    
+
     handleDownload = async (fileName) => {
         const { apiUrl } = this.state;
 
@@ -101,7 +101,7 @@ class FileList extends React.Component {
 
             if (response.status === 200) {
                 const { url } = response.data;
-                
+
                 // Open the presigned URL in the same window
                 window.location.href = url;
             } else {

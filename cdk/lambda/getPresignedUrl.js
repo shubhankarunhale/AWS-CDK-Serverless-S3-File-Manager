@@ -2,7 +2,7 @@ const { S3Client } = require("@aws-sdk/client-s3");
 const { createPresignedPost } = require("@aws-sdk/s3-presigned-post");
 
 exports.handler = async (event) => {
- 
+
     console.log("Received event:", JSON.stringify(event));
     let body;
     try {
@@ -14,14 +14,14 @@ exports.handler = async (event) => {
             body: JSON.stringify({ message: "Invalid request body" }),
         };
     }
-    
-    const { key } = body || {}; // Access key from query string parameters
-    
+
+    const { key } = body || {};
+
     try {
         if (!process.env.BUCKET_NAME) {
             throw new Error('BUCKET_NAME environment variable is not defined.');
         }
-        
+
         const BUCKET_NAME = process.env.BUCKET_NAME;
         if (!process.env.CLOUDFRONT_URL) {
             throw new Error('CLOUDFRONT_URL environment variable is not defined.');
@@ -30,9 +30,9 @@ exports.handler = async (event) => {
 
         const params = {
             Bucket: BUCKET_NAME,
-            Key: key, // Specify the key for the object being uploaded
-            Expires: 3600, 
-            ContentType: 'multipart/form-data'// Expiration time of the presigned URL in seconds
+            Key: key, 
+            Expires: 3600,
+            ContentType: 'multipart/form-data'
         };
 
         const s3Client = new S3Client({ region: process.env.AWS_REGION });
@@ -41,7 +41,7 @@ exports.handler = async (event) => {
 
         return {
             statusCode: 200,
-            headers: { 
+            headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": CLOUDFRONT_URL,
                 "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token, X-Amz-User-Agent",
@@ -60,5 +60,3 @@ exports.handler = async (event) => {
         };
     }
 };
-//aws s3 presign s3://project-documents-654654368612-us-east-1/Transcripts --expires-in 3600
-//curl -X PUT -T Transcripts.pdf ''

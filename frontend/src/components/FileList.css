@@ -1,32 +1,15 @@
-  .delete-button.btn.btn-primary {
-    background-color: #625567a3; /* Dark green button */
-    color: #ffffff; /* White text color */
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 8px 16px;
-    margin-right: 10px;
-   
-    transition: background-color 0.3s ease;
-  }
-  
-  .delete-button.btn.btn-primary:hover {
-    background-color: #4d4769; /* Green on hover */
-  }
-  .download-button.btn.btn-primary {
-    background-color: #625567a3; /* Dark green button */
-    color: #ffffff; /* White text color */
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 8px 16px;
-    margin-right: 10px;
-   
-    transition: background-color 0.3s ease;
-  }
-  
-  .download-button.btn.btn-primary:hover {
-    background-color: #4d4769; /* Green on hover */
-  }
+.delete-button.btn.btn-primary, .download-button.btn.btn-primary {
+  background-color: #625567a3;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 16px;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button.btn.btn-primary:hover, .download-button.btn.btn-primary:hover {
+  background-color: #4d4769;
+}
