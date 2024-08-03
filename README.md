@@ -2,6 +2,7 @@
 
 Securely manage and upload files with dynamic CORS configuration, powered by AWS services and adhering to the least privilege principle.
 
+![Demo GIF](assets/demo.gif)
 ## Quick Start
 
 ### AWS Account Permissions
