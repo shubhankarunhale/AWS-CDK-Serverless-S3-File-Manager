@@ -80,7 +80,7 @@ There are two ways to deploy this application:
 
 ### **Secure File Operations**
 
-* Utilizes presigned URLs for both uploads and downloads, adhering to the least privilege principle to maintain security.
+* Uses presigned URLs for both uploads and downloads, ensuring that access to the private S3 bucket is tightly controlled. The bucket is not publicly accessible, and file operations are only permitted through these secure presigned URLs, adhering to the principle of least privilege.
 
 ### **Efficient and Scalable Architecture**
 
