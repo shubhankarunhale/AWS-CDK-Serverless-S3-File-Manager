@@ -16,18 +16,18 @@
     color: #333; /* Dark text color */
   }
   
-  .upload-button {
-    background-color: #388e3c; /* Dark green button */
+  .upload-button.btn.btn-primary {
+    background-color: #8b7bcf; /* Dark green button */
     color: #ffffff; /* White text color */
     border: none;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
   }
   
-  .upload-button:hover {
-    background-color: #4caf50; /* Green on hover */
+  .upload-button.btn.btn-primary:hover {
+    background-color: #4d4769; /* Green on hover */
   }
   

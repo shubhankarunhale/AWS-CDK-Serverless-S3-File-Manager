@@ -3,7 +3,7 @@ import axios from 'axios';
 import FileUpload from './components/FileUpload';
 import FileList from './components/FileList';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
-import './App.css';  // Ensure this file contains global styles for the app
+import './App.css';  
 
 const App = () => {
     const [files, setFiles] = useState([]);
@@ -36,14 +36,15 @@ const App = () => {
 
     return (
         <Container className="App">
+            
             <Row className="mb-4">
                 <Col>
-                    <header className="App-header">
-                        <h1 className="text-center">Serverless File Management</h1>
-                    </header>
+                    <img src="/logo.gif" alt="Animated Logo" className="App-logo" />
                 </Col>
+                
             </Row>
             <Row className="mb-4">
+                
                 <Col>
                     <FileUpload apiUrl={apiUrl} onUploadSuccess={handleFileUploadSuccess} />
                 </Col>

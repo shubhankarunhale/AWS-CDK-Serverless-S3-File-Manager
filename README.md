@@ -1,41 +1,41 @@
-# AWS-S3-Secure-File-Manager-Starter
+# AWS CDK Serverless S3 File Manager
 
-**AWS-S3-Secure-File-Manager-Starter** is a serverless file management application that leverages AWS services to provide a secure and efficient file upload solution. The standout feature of this app is its **dynamic CORS and frontend configuration**, which happens at runtime, setting it apart from existing alternatives.
+Securely manage and upload files with dynamic CORS configuration, powered by AWS services and adhering to the least privilege principle.
 
-## Key Feature
-
-### **Dynamic CORS and Frontend Configuration**
-
-The most important and unique aspect of this application is its ability to dynamically handle CORS and frontend configuration at runtime:
-
-- **Dynamic CORS Configuration**: Automatically configures CORS settings as new roles are created. This ensures that the S3 bucket’s access policies are updated dynamically, with no manual intervention required.
-
-- **Secure Access Policies**: Dynamically generates access policies to ensure that only requests from the React frontend are accepted, keeping the bucket secure out of the box.
-
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v20 or later)
-- AWS CLI
-- AWS CDK (v2)
-- GitHub account
+## Quick Start
 
 ### AWS Account Permissions
 
 Ensure the AWS account you're using has the necessary permissions to access and manage the required services. This includes permissions for:
 
-*   S3
-*   Lambda
-*   API Gateway
-*   CloudFormation
-*   IAM
+* S3
+* Lambda
+* API Gateway
+* CloudFormation
+* IAM
+* Systems Manager (SSM)
+* Elastic Container Registry (ECR)
+* Simple Notification Service (SNS)
+* Simple Queue Service (SQS)
+* CloudFront
 
-To configure the AWS account with the necessary permissions, use the AWS Management Console or AWS CLI to attach the appropriate policies to your user or role. You can use AWS-managed policies such as `AdministratorAccess` for full permissions or create a custom policy with the least privilege principle.
+To configure the AWS account with the necessary permissions, use the AWS Management Console or AWS CLI to attach the appropriate policies to your user or role. 
 
+It is recommended to create a custom policy with the least privilege principle.
 
-### Deploy Using GitHub Actions
+You can use AWS-managed policies such as `AdministratorAccess` for full permissions to start, and debug permssion related issues.
+
+With the correct setup, you'll have your full stack serverless app up and running in minutes!
+
+### Deployment Options
+
+There are two ways to deploy this application:
+
+1. **Deploy Using GitHub Actions**: This method requires no prerequisite installations other than a GitHub account. It handles deployment automatically through GitHub Actions.
+
+2. **Run Locally**: Requires certain prerequisites to be installed locally.
+
+### 1. Deploy Using GitHub Actions
 
 1. **Fork the Repository:**
    Fork this repository to your GitHub account.
@@ -50,7 +50,14 @@ To configure the AWS account with the necessary permissions, use the AWS Managem
 3. **Push Changes:**
    Push any changes to your forked repository. This will trigger the GitHub Actions workflow to deploy your application.
 
-### Run Locally
+
+### 2. Run Locally
+
+#### Prerequisites
+- Node.js (v20 or later)
+- AWS CLI
+- AWS CDK (v2)
+- GitHub account
 
 1. **Clone the Repository:**
    ```sh
@@ -59,26 +66,28 @@ To configure the AWS account with the necessary permissions, use the AWS Managem
    ```
 
 2. **Run deploy.sh in bash**
-   ```./deploy.sh
+   ```
+   ./deploy.sh
     ```
+   
 
-## Features
+## Key Features
 
-- **Secure File Uploads**:
-  - **Least Privilege Principle**: Presigned URLs act like temporary keys that grant limited access for file uploads, minimizing risk and exposure.
-  - **No Lambda Permissions Needed**: Uploads are handled directly by S3, reducing Lambda's role and associated security risks.
+### **Dynamic CORS and Frontend Configuration**
 
-- **Scalable Architecture**:
-  - **Direct Upload to S3**: Clients upload files directly to S3, bypassing Lambda, which is like having a direct express lane for faster and more scalable uploads.
+* Automatically configures CORS settings and access policies at runtime, ensuring secure and seamless operation.
 
-- **Performance Optimization**:
-  - **Faster Uploads**: By avoiding Lambda for uploads, the app reduces latency and speeds up the process, similar to cutting out the middleman in a transaction.
+### **Secure File Operations**
 
-- **Cost Efficiency**:
-  - **Reduced Lambda Execution Time**: Handling uploads directly through S3 minimizes compute resource usage and costs, much like saving on fees by avoiding unnecessary services.
+* Utilizes presigned URLs for both uploads and downloads, adhering to the least privilege principle to maintain security.
 
-- **Simplicity and Flexibility**:
-  - **Client-Side Control**: Provides customizable upload parameters directly from the client application, allowing for tailored upload experiences.
+### **Efficient and Scalable Architecture**
+
+* Directly manages file operations through S3, bypassing Lambda to enhance performance and scalability while reducing costs.
+
+### **Easy Integration**
+
+* Seamlessly integrate into other applications by updating the frontend URL, with automated network configurations handled by the app.
 
 ## How It Works
 
@@ -91,16 +100,12 @@ To configure the AWS account with the necessary permissions, use the AWS Managem
 3. **Security and Validation**:
    - AWS validates the presigned URL parameters, ensuring that only authorized uploads are accepted, like checking IDs before entry.
 
-## Example Use Case
-
-**Scenario**: Uploading user-generated files to an S3 bucket.
-
-**Implementation**: Lambda functions generate presigned URLs for each upload request.
-
-**Advantages**:
-- Simplified architecture
-- Reduced Lambda execution time and costs
-- Enhanced security with temporary, scoped access
+  ## Integration Possibilities:
+  **Seamlessly incorporate into major platforms like:**
+  
+- **Content Management Systems (CMS)**: Perfect for handling media assets (e.g., WordPress).
+- **E-Commerce Platforms**: Ideal for managing product images and customer reviews (e.g., Shopify).
+- **Social Media Platforms**: Great for user-uploaded content such as photos and videos (e.g., Instagram).
 
 
 ## License

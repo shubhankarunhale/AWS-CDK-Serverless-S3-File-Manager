@@ -138,10 +138,10 @@ class FileList extends React.Component {
                             <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
                                 {file.key}
                                 <div>
-                                    <Button variant="danger" onClick={() => this.handleDelete(file.key)} className="me-2">
+                                    <Button class="danger" onClick={() => this.handleDelete(file.key)} className="delete-button">
                                         Delete
                                     </Button>
-                                    <Button variant="primary" onClick={() => this.handleDownload(file.key)}>
+                                    <Button variant="primary" onClick={() => this.handleDownload(file.key)} className="download-button">
                                         Download
                                     </Button>
                                 </div>
