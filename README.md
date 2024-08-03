@@ -91,6 +91,8 @@ There are two ways to deploy this application:
 * Seamlessly integrate into other applications by updating the frontend URL, with automated network configurations handled by the app.
 
 ## How It Works
+![Architecture Diagram](assets/ArchitectureDiagram.png)
+
 
 1. **Generating Presigned URLs**:
    - Your backend generates presigned URLs using AWS SDKs. These URLs are temporary and scoped to specific S3 operations, akin to giving out temporary access passes.
