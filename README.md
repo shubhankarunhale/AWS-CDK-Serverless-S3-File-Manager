@@ -2,6 +2,9 @@
 
 Securely manage and upload files with dynamic CORS configuration, powered by AWS services and adhering to the least privilege principle.
 
+$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ [Live Demo](https://d3e6uqkvaffypm.cloudfront.net/)                     
+
+
 ![Demo GIF](assets/demo.gif)
 ## Quick Start
 
